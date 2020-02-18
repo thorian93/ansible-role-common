@@ -1,0 +1,23 @@
+---
+- name: Concatenate Groups Presence Variables.
+  set_fact:
+    common_groups_present: "{% if common_global_groups_present is defined %}{{ common_global_groups_present }}{% endif %}{% if common_os_groups_present is defined %}+ {{ common_os_groups_present }}{% endif %}{% if common_system_groups_present is defined %}+ {{ common_system_groups_present }}{% endif %}{% if common_stage_groups_present is defined %}+ {{ common_stage_groups_present }}{% endif %}{% if common_role_groups_present is defined %}+ {{ common_role_groups_present }}{% endif %}"
+
+- name: Concatenate Groups Absence Variables.
+  set_fact:
+    common_groups_absent: "{% if common_global_groups_absent is defined %}{{ common_global_groups_absent }}{% endif %}{% if common_os_groups_absent is defined %}+ {{ common_os_groups_absent }}{% endif %}{% if common_system_groups_absent is defined %}+ {{ common_system_groups_absent }}{% endif %}{% if common_stage_groups_absent is defined %}+ {{ common_stage_groups_absent }}{% endif %}{% if common_role_groups_absent is defined %}+ {{ common_role_groups_absent }}{% endif %}"
+
+- name: Create groups.
+  group:
+    name: "{{ item.name }}"
+    state: "{{ item.state }}"
+    system: "{{ item.system }}"
+  with_items: "{{ common_groups_present }}"
+  when: common_groups_present != ""
+
+- name: Remove groups.
+  group:
+    name: "{{ item.name }}"
+    state: "{{ item.state }}"
+  with_items: "{{ common_groups_absent }}"
+  when: common_groups_absent != ""

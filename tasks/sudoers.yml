@@ -1,0 +1,11 @@
+---
+- name: Configure additional sudoers Permissions.
+  template:
+    dest: /etc/sudoers.d/
+    src: "{{ item }}"
+    mode: 0440
+    owner: root
+    group: root
+    validate: 'visudo -cf %s'
+  with_fileglob:
+    - "{{ common_sudoers_files }}"

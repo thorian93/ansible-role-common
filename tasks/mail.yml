@@ -1,0 +1,24 @@
+---
+- name: Configure /etc/aliases.
+  lineinfile:
+    path: /etc/aliases
+    line: "{{ item.line }}"
+    regexp: "{{ item.regexp }}"
+    insertbefore: "{{ item.insertbefore }}"
+    state: "{{ item.state }}"
+    setype: "{{ item.setype }}"
+    backup: "{{ item.backup }}"
+  with_items: "{{ common_etc_aliases }}"
+  notify:
+    - run newaliases
+    - restart postfix
+
+- name: Configure /etc/postfix/main.cf for local use only.
+  lineinfile:
+    path: /etc/postfix/main.cf
+    line: "inet_interfaces = localhost"
+    regexp: "^.*inet_interfaces ="
+    state: present
+    backup: yes
+  notify:
+    - restart postfix

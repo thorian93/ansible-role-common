@@ -1,0 +1,38 @@
+---
+- name: Concatenate Users Presence Variables.
+  set_fact:
+    common_users_present: "{% if common_global_users_present is defined %}{{ common_global_users_present }}{% endif %}{% if common_os_users_present is defined %}+ {{ common_os_users_present }}{% endif %}{% if common_system_users_present is defined %}+ {{ common_system_users_present }}{% endif %}{% if common_stage_users_present is defined %}+ {{ common_stage_users_present }}{% endif %}{% if common_role_users_present is defined %}+ {{ common_role_users_present }}{% endif %}"
+
+- name: Concatenate Users Absence Variables.
+  set_fact:
+    common_users_absent: "{% if common_global_users_absent is defined %}{{ common_global_users_absent }}{% endif %}{% if common_os_users_absent is defined %}+ {{ common_os_users_absent }}{% endif %}{% if common_system_users_absent is defined %}+ {{ common_system_users_absent }}{% endif %}{% if common_stage_users_absent is defined %}+ {{ common_stage_users_absent }}{% endif %}{% if common_role_users_absent is defined %}+ {{ common_role_users_absent }}{% endif %}"
+
+- name: Create users.
+  user:
+    name: "{{ item.name }}"
+    password: "{{ item.password }}"
+    update_password: "{{ item.update_password }}"
+    groups: "{{item.user_groups}}"
+    shell: "{{ item.shell }}"
+    system: "{{ item.system }}"
+    state: "{{ item.state }}"
+  with_items: "{{ common_users_present }}"
+  when: common_users_present != ""
+
+- name: Add Public Keys for users.
+  authorized_key:
+    user: "{{ item.0.name }}"
+    state: "{{ item.0.state }}"
+    key: "{{ item.1 | default() }}"
+  with_subelements:
+    - "{{ common_users_present }}"
+    - keys
+  when: common_users_present != ""
+
+- name: Remove users.
+  user:
+    name: "{{ item.name }}"
+    state: "{{ item.state }}"
+    remove: "{{ item.remove }}"
+  with_items: "{{ common_users_absent }}"
+  when: common_users_absent != ""

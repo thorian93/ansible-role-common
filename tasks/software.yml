@@ -1,0 +1,32 @@
+---
+- name: Install basic Applications.
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ common_apps }}"
+  when: common_apps is defined
+  ignore_errors: true
+
+- name: Install Derivate specific Applications.
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ common_apps_derivate }}"
+  when: common_apps_derivate is defined
+  ignore_errors: true
+
+- name: Install Distribution specific Applications.
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ common_apps_distribution }}"
+  when: common_apps_distribution is defined
+  ignore_errors: true
+
+- name: Install Distribution Version specific Applications.
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ common_apps_distribution_version }}"
+  when: common_apps_distribution_version is defined
+  ignore_errors: true

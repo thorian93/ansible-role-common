@@ -1,0 +1,8 @@
+---
+common_apps_derivate:
+# X
+  - xz
+# Y
+  - yum-utils
+
+common_admin_group: wheel

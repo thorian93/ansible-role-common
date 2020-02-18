@@ -1,0 +1,8 @@
+---
+- name: Configure VIM.
+  lineinfile:
+    dest: /etc/vim/vimrc
+    line: "let g:skip_defaults_vim = 1"
+    regexp: "(# |^)let g:skip_defaults_vim.*"
+    state: present
+    backup: true

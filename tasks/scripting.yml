@@ -1,0 +1,26 @@
+---
+- name: Create scripts path.
+  file:
+    path: "{{ scripting_path }}"
+    state: directory
+    owner: root
+    group: root
+    mode: 0740
+
+- name: Upload scripts.
+  template:
+    src: "{{ item.name }}.j2"
+    dest: "{{ item.dest }}"
+    owner: "{{ item.owner }}"
+    group: "{{ item.group }}"
+    mode: "{{ item.mode }}"
+  with_items: "{{ scripting_scripts }}"
+  when: scripting_scripts is defined
+
+- name: Create config path.
+  file:
+    path: "{{ config_path }}"
+    state: directory
+    owner: root
+    group: root
+    mode: 0740

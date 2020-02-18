@@ -1,0 +1,80 @@
+---
+- name: Preflight - Fail if target host is not stable for this Role.
+  fail:
+    msg: "This role is not stable for the target operating system, {{ ansible_distribution }} {{ ansible_distribution_major_version }}."
+  when: (ansible_distribution is not defined) or
+        (ansible_distribution_version is not defined) or
+        (ansible_distribution+" "+ansible_distribution_major_version not in common_stable_os)
+
+- name: Set hostname.
+  hostname:
+    name: "{{ host_name }}"
+
+- name: Configure /etc/hosts.
+  lineinfile:
+    path: /etc/hosts
+    line: "127.0.0.1 {{ host_name }} localhost"
+    regexp: "^127.0.0.1"
+    state: present
+  notify: restart postfix
+
+- name: Include Derivate specific Variables.
+  include_vars: "{{ ansible_os_family }}.yml"
+
+- name: Include Distribution specific Variables.
+  include_vars: "{{ ansible_distribution }}.yml"
+
+- name: Include Distribution Version specific Variables.
+  include_vars: "{{ ansible_distribution }}{{ ansible_distribution_major_version }}.yml"
+  ignore_errors: true
+
+- name: Include OS family specific playbook
+  include_tasks: "{{ ansible_os_family }}.yml"
+
+- name: Include DNS Nameservers Management Playbook
+  include_tasks: dns.yml
+  when: common_dns_configure
+
+- name: Include Timezone Management Playbook
+  include_tasks: timezone.yml
+  when: common_timezone_configure
+
+- name: Include Software Management Playbook
+  include_tasks: software.yml
+  when: common_software_configure
+
+- name: Include Mail Management Playbook
+  include_tasks: mail.yml
+  when: common_mail_configure
+
+- name: Include Disks Management Playbook
+  include_tasks: disks.yml
+  when: common_disks_configure
+
+- name: Include Groups Management playbook
+  include_tasks: groups.yml
+  when: common_groups_configure
+
+- name: Include Users Management playbook
+  include_tasks: users.yml
+  when: common_users_configure
+
+- name: Include Sudoers Management playbook
+  include_tasks: sudoers.yml
+  when: common_sudoers_configure
+
+- name: Include Crontabs Management playbook
+  include_tasks: crontabs.yml
+  when: common_crontabs_configure
+
+- name: Include Scripting Management playbook
+  include_tasks: scripting.yml
+  when: common_scripting_configure
+
+- name: Include VIM playbook
+  include_tasks: vim.yml
+  when: common_vim_configure
+
+- name: Include oh-my-zsh playbook
+  include_tasks: oh-my-zsh.yml
+  when: common_zsh_configure

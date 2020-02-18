@@ -1,0 +1,8 @@
+# {{ ansible_managed }}
+# Nameservers:
+{% for server in common_dns_servers %}
+nameserver {{ server }}
+{% endfor %}
+options timeout:3
+options attempts:2
+options rotate

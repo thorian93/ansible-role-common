@@ -1,0 +1,27 @@
+---
+- name: Configure shopt preferences.
+  lineinfile:
+   dest: /etc/bashrc.bashrc
+   line: "{{item}}"
+   create: yes
+  with_items: "{{shopt_options}}"
+
+- name: Configure bash completion.
+  blockinfile:
+   dest: /etc/bashrc.bashrc
+   create: yes
+   marker: "# {mark} ANSIBLE MANAGED BLOCK"
+   content: |
+    if ! shopt -oq posix; then
+       if [ -f /usr/share/bash-completion/bash_completion ]; then
+          . /usr/share/bash-completion/bash_completion
+       elif [ -f /etc/bash_completion ]; then
+          . /etc/bash_completion
+       fi
+    fi
+
+- name: Update APT Cache if it is installed.
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+  when: ansible_pkg_mgr == "apt"

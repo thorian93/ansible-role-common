@@ -1,0 +1,68 @@
+---
+# Support for OSes:
+common_stable_os:
+  - Debian 9
+  - Debian 10
+  - Ubuntu 16
+  - Ubuntu 18
+  - CentOS 7
+  - CentOS 8
+  - Fedora 30
+  - Fedora 31
+  - openSUSE Leap 42
+
+# Common Management Selections:
+common_crontabs_configure: false
+common_disks_configure: false
+common_dns_configure: false
+common_groups_configure: false
+common_mail_configure: false
+common_zsh_configure: false
+common_scripting_configure: false
+common_software_configure: false
+common_users_configure: false
+common_timezone_configure: false
+common_sudoers_configure: false
+common_vim_configure: false
+
+common_sudoers_files: "*_sudoers"
+
+# EPEL for RedHat:
+common_epel_enabled: false
+
+# DNS Servers
+common_dns_servers:
+  - 1.1.1.1
+  - 1.0.0.1
+
+# Timezone
+common_timezone: "Europe/Berlin"
+
+# Mail Aliases:
+common_etc_aliases:
+  - name: "Redirect root mails."
+    line: 'root:		root'
+    regexp: '^root\:.*'
+    insertbefore: EOF
+    setype: etc_aliases_t
+    state: present
+    backup: yes
+
+# Scripting:
+scripting_path: /opt/control/scripts
+config_path: /opt/control/config
+
+# Bash
+## Shopt options:
+shopt_options:
+  - shopt -s cdspell
+  - shopt -s nocaseglob
+
+common_zsh_users: root
+common_zsh_source: "https://github.com/robbyrussell/oh-my-zsh.git"
+common_zsh_theme: clean
+common_zsh_path: /opt/oh-my-zsh
+common_zsh_plugins:
+ - git
+ - rsync
+ - wd

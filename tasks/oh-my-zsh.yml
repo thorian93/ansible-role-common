@@ -1,0 +1,26 @@
+---
+- name: Install zsh.
+  package:
+    name: zsh
+    state: present
+
+- name: Download oh-my-zsh.
+  git:
+    repo: "{{ common_zsh_source }}"
+    dest: "{{ common_zsh_path }}"
+    update: yes
+
+- name: Copy .zshrc.
+  template:
+    src: zshrc.j2
+    dest: "/{% if 'root' in item %}{{ item }}{% else %}home/{{ item }}{% endif %}/.zshrc"
+    backup: yes
+  with_items: "{{ common_zsh_users }}"
+
+- name: Determine zsh binary location.
+  shell: "which zsh"
+  register: common_zsh_binary_location
+
+- name: Enable zsh as default shell.
+  command: "chsh -s {{ common_zsh_binary_location.stdout }} {{ item }}"
+  with_items: "{{ common_zsh_users }}"

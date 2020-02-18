@@ -1,0 +1,45 @@
+---
+common_apps:
+# B
+  - bzip2
+# C
+  - ca-certificates
+# G
+  - git
+  - glances
+  - gzip
+# H
+  - htop
+# I
+  - iotop
+  - iptstate
+# L
+  - lsof
+# M
+  - mc
+  - mlocate
+  - mtr
+# N
+  - net-tools
+  - ncdu
+# P
+  - parted
+  - postfix # Collides with sendmail
+  - powertop
+# R
+  - rsync
+  - rng-tools
+# S
+#  - sendmail # Postfix is the way to go! Its a successor of sendmail!
+  - screen
+# T
+  - tig
+  - tree
+# U
+  - unzip
+# V
+  - vim
+# W
+  - wget
+# Z
+  - zsh

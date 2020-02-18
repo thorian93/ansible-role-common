@@ -1,0 +1,43 @@
+---
+common_apps_derivate:
+# A
+  - apt-transport-https
+  - aptitude
+# B
+  - bash-completion
+# C
+  - cmatrix
+# D
+  - debian-goodies
+# H
+  - hddtemp
+# I
+  - iftop
+  - inotify-tools
+  - inxi
+  - iperf
+# L
+  - lolcat
+  - lsb-release
+# M
+  - mailutils
+# N
+  - nmon
+# P
+  - p7zip
+  - python-apt
+  - python-selinux
+# S
+  - sl
+# T
+#  - tuptime # Not stable yet
+  - tig
+# U
+  - unar
+  - unison
+# W
+  - whois
+# X
+  - xz-utils
+
+common_admin_group: sudo

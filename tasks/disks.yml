@@ -1,0 +1,8 @@
+---
+- name: Get all ext4 disk devices.
+  shell: "df -Pt ext4 | cut -d ' ' -f 1 | tail -n +2"
+  register: common_disks_list
+
+- name: Disable disk checks on all ext4 disk devices.
+  shell: "tune2fs -c 0 -i 0 {{ item }}"
+  with_items: "{{ common_disks_list.stdout_lines }}"
