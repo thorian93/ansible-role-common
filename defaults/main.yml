@@ -9,7 +9,8 @@ common_stable_os:
   - CentOS 8
   - Fedora 30
   - Fedora 31
-  - openSUSE Leap 42
+  # - openSUSE Leap 15
+  # - openSUSE Leap 42
 
 # Common Management Selections:
 common_crontabs_configure: false
