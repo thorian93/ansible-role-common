@@ -1,8 +1,12 @@
 # {{ ansible_managed }}
-# Nameservers:
+# This file is set immutable with 'chattr -i' to make sure no other program changes it.
+# If you try to make manual changes to this file be aware that they might be overwritten by Ansible!
+{% for search in common_dns_search %}
+search {{ search }}
+{% endfor %}
 {% for server in common_dns_servers %}
 nameserver {{ server }}
 {% endfor %}
-options timeout:3
-options attempts:2
-options rotate
+{% for option in common_dns_options %}
+options {{ option }}
+{% endfor %}
