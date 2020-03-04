@@ -22,3 +22,13 @@
     backup: yes
   notify:
     - restart postfix
+
+- name: Configure /etc/postfix/main.cf for IPv4 only.
+  lineinfile:
+    path: /etc/postfix/main.cf
+    line: "inet_protocols = ipv4"
+    regexp: "^.*inet_protocols ="
+    state: present
+    backup: yes
+  notify:
+    - restart postfix
