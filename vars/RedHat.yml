@@ -5,4 +5,5 @@ common_apps_derivate:
 # Y
   - yum-utils
 
+common_vimrc_path: /etc/vimrc
 common_admin_group: wheel
