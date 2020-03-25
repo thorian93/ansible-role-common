@@ -1,7 +1,20 @@
 ---
+- name: Determine if /etc/resolv.conf is a Symlink.
+  stat:
+    path: /etc/resolv.conf
+  register: common_resolv_symlink_status
+
+- name: Remove Symlink on /etc/resolv.conf for Ubuntu.
+  file:
+   path: /etc/resolv.conf
+   state: absent
+  when: common_resolv_symlink_status.stat.islnk is defined and common_resolv_symlink_status.stat.islnk and ansible_distribution == "Ubuntu"
+
 - name: Make sure /etc/resolv.conf is modifiable for this play.
-  command: chattr -i /etc/resolv.conf
-  ignore_errors: true
+  shell: chattr -i /etc/resolv.conf
+  args:
+    executable: /bin/bash
+  when: common_resolv_symlink_status.stat.islnk is defined and not common_resolv_symlink_status.stat.islnk
 
 - name: Configure DNS Servers for Host.
   template:
@@ -14,5 +27,6 @@
     setype: net_conf_t
 
 - name: Make sure /etc/resolv.conf is not modifiable by anyone.
-  command: chattr +i /etc/resolv.conf
-  when: ansible_distribution != "Ubuntu"
+  shell: chattr +i /etc/resolv.conf
+  args:
+    executable: /bin/bash
