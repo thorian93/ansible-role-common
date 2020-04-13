@@ -41,7 +41,9 @@ Kudos to [HarryHarcourt](https://github.com/HarryHarcourt) for this idea!
 
 ## Example Playbook
 
-    - hosts: foobar
+    ---
+    - name: "Run role."
+      hosts: all
       become: yes
       roles:
         - ansible-role-common
