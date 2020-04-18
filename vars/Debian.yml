@@ -5,8 +5,6 @@ common_apps_derivate:
   - aptitude
 # B
   - bash-completion
-# C
-  - cmatrix
 # D
   - debian-goodies
 # H
@@ -15,9 +13,7 @@ common_apps_derivate:
   - iftop
   - inotify-tools
   - inxi
-  - iperf
 # L
-  - lolcat
   - lsb-release
 # M
   - mailutils
@@ -27,8 +23,6 @@ common_apps_derivate:
   - p7zip
   - python-apt
   - python-selinux
-# S
-  - sl
 # T
 #  - tuptime # Not stable yet
   - tig

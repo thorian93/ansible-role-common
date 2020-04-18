@@ -3,6 +3,6 @@ common_apps_distribution:
 # C
   - cronie
 # P
-  - python2-dnf
+  - python-dnf
 # U
   - util-linux-user
