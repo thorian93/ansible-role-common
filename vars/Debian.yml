@@ -34,5 +34,6 @@ common_apps_derivate:
 # X
   - xz-utils
 
+common_timezone_package: tzdata
 common_vimrc_path: /etc/vim/vimrc
 common_admin_group: sudo

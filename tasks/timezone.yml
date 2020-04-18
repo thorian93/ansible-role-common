@@ -1,7 +1,7 @@
 ---
-- name: Make sure tzdata is installed.
+- name: Make sure timezone package is installed.
   package:
-    name: tzdata
+    name: "{{ common_timezone_package }}"
     state: present
 
 - name: Check for a zoneinfo file
