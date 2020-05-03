@@ -6,6 +6,11 @@ This role manages several parts of a Linux system which are not worth their own 
 
 When managing DNS resolution with this role be aware of the following: On Ubuntu this role will remove the symlink on /etc/resolv.conf if it exists and replace it with a static file. The symlink originates in the `systemd-resolved` daemon. Managing that daemon is at least currently out of scope for this role. I know this not a beautiful solution but it works for me. If you know how to handle this better feel free to contact me or create a PR.
 
+## Known issues
+
+- Fedora 30: The dropping support for Python 2 in Fedora causes problems for Ansible. This can be fixed by setting the `ansible_python_interpreter` variable to the appropriate Python 3 binary.
+- **openSUSE Leap 15 and 42**: A missing dependency does not allow installation of a dependent tool. A workaround is in place but does not work properly.
+
 ## Requirements
 
 No special requirements; note that this role requires root access, so either run it in a playbook with a global `become: yes`, or invoke the role in your playbook like:
@@ -19,7 +24,94 @@ No special requirements; note that this role requires root access, so either run
 
 Available variables are listed below, along with default values (see `defaults/main.yml`):
 
-ToDo
+    common_crontabs_configure: false
+    common_disks_configure: false
+    common_dns_configure: false
+    common_groups_configure: false
+    common_mail_configure: false
+    common_zsh_configure: false
+    common_scripting_configure: false
+    common_software_configure: false
+    common_users_configure: false
+    common_timezone_configure: false
+    common_sudoers_configure: false
+    common_vim_configure: false
+
+Enable and disable managed sections of this role.
+
+    common_sudoers_files: "*_sudoers"
+
+Configure lookup path for custom sudoers files.
+
+    common_optional_apps_install: false
+
+Enable installation of optional apps.
+
+    common_epel_enabled: false
+
+Enable EPEL repository on RedHat derivates.
+
+    common_dns_search: []
+
+Configure DNS search path e.g for your local network.
+
+    common_dns_servers:
+      - 1.1.1.1
+      - 1.0.0.1
+
+Configure your DNS servers.
+
+    common_dns_options:
+      # - "timeout:3"
+      # - "attempts:2"
+      # - "rotate"
+
+Configure additional options for resolv.conf
+
+    common_timezone: "Europe/Berlin"
+
+Configure the timezone.
+
+    common_etc_aliases:
+      - name: "Redirect root mails."
+        line: 'root:		root'
+        regexp: '^root\:.*'
+        insertbefore: EOF
+        setype: etc_aliases_t
+        state: present
+        backup: yes
+
+Configure /etc/aliases.
+
+    scripting_path: /opt/control/scripts
+    config_path: /opt/control/config
+
+Configure general paths.
+
+    shopt_options:
+      - shopt -s cdspell
+      - shopt -s nocaseglob
+
+Configure global shopt options.
+
+    common_zsh_users: root
+
+Configure ZSH for this users.
+
+    common_zsh_theme: clean
+
+Configure the oh my zsh theme.
+
+    common_zsh_path: /opt/oh-my-zsh
+
+Configure the oh my zsh installation path.
+
+    common_zsh_plugins:
+    - git
+    - rsync
+    - wd
+
+Enable these oh my zsh plugins.
 
 ## Dependencies
 

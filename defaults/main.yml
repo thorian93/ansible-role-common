@@ -1,5 +1,4 @@
 ---
-# Support for OSes:
 common_stable_os:
   - Debian 9
   - Debian 10
@@ -12,7 +11,7 @@ common_stable_os:
   - openSUSE Leap 15
   # - openSUSE Leap 42
 
-# Common Management Selections:
+# Common Management Selections
 common_crontabs_configure: false
 common_disks_configure: false
 common_dns_configure: false
@@ -26,9 +25,13 @@ common_timezone_configure: false
 common_sudoers_configure: false
 common_vim_configure: false
 
+# Sudoers
 common_sudoers_files: "*_sudoers"
 
-# EPEL for RedHat:
+# Optional Apps
+common_optional_apps_install: false
+
+# EPEL for RedHat
 common_epel_enabled: false
 
 # DNS
@@ -44,7 +47,7 @@ common_dns_options:
 # Timezone
 common_timezone: "Europe/Berlin"
 
-# Mail Aliases:
+# Mail Aliases
 common_etc_aliases:
   - name: "Redirect root mails."
     line: 'root:		root'
@@ -54,18 +57,16 @@ common_etc_aliases:
     state: present
     backup: yes
 
-# Scripting:
+# Scripting
 scripting_path: /opt/control/scripts
 config_path: /opt/control/config
 
-# Bash
-## Shopt options:
+# Shopt options
 shopt_options:
   - shopt -s cdspell
   - shopt -s nocaseglob
 
 common_zsh_users: root
-common_zsh_source: "https://github.com/robbyrussell/oh-my-zsh.git"
 common_zsh_theme: clean
 common_zsh_path: /opt/oh-my-zsh
 common_zsh_plugins:
