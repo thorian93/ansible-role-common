@@ -1,22 +1,19 @@
 ---
-common_apps:
+common_zsh_source: "https://github.com/robbyrussell/oh-my-zsh.git"
+
+common_minimal_apps:
 # B
   - bzip2
 # C
   - ca-certificates
 # G
   - git
-  - glances
   - gzip
 # H
   - htop
-# I
-  - iotop
-  - iptstate
 # L
   - lsof
 # M
-  - mc
   - mlocate
   - mtr
 # N
@@ -24,16 +21,12 @@ common_apps:
   - ncdu
 # P
   - parted
-  - postfix # Collides with sendmail
-  - powertop
+  - postfix
 # R
   - rsync
-  - rng-tools
 # S
-#  - sendmail # Postfix is the way to go! Its a successor of sendmail!
   - screen
 # T
-  - tig
   - tree
 # U
   - unzip
@@ -43,3 +36,11 @@ common_apps:
   - wget
 # Z
   - zsh
+
+common_optional_apps:
+# G
+  - glances
+# M
+  - mc
+# P
+  - powertop

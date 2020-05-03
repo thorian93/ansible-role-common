@@ -12,7 +12,7 @@ common_apps_derivate:
 # I
   - iftop
   - inotify-tools
-  - inxi
+  - iptstate
 # L
   - lsb-release
 # M
@@ -22,10 +22,9 @@ common_apps_derivate:
 # P
   - p7zip
   - python-apt
-  - python-selinux
 # T
-#  - tuptime # Not stable yet
   - tig
+  - tuptime
 # U
   - unar
   - unison

@@ -30,8 +30,12 @@
   include_vars: "{{ ansible_distribution }}{{ ansible_distribution_major_version }}.yml"
   ignore_errors: true
 
-- name: Include OS family specific playbook
+- name: Include OS Family specific Playbook.
   include_tasks: "{{ ansible_os_family }}.yml"
+
+- name: Include Software Management Playbook
+  include_tasks: software.yml
+  when: common_software_configure
 
 - name: Include DNS Nameservers Management Playbook
   include_tasks: dns.yml
@@ -40,10 +44,6 @@
 - name: Include Timezone Management Playbook
   include_tasks: timezone.yml
   when: common_timezone_configure
-
-- name: Include Software Management Playbook
-  include_tasks: software.yml
-  when: common_software_configure
 
 - name: Include Mail Management Playbook
   include_tasks: mail.yml

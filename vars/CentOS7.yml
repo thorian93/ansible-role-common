@@ -2,5 +2,3 @@
 common_apps_distribution_version:
 # L
   - libselinux-python
-# T
-  - tig
