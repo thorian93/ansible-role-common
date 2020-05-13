@@ -1,0 +1,22 @@
+---
+- name: Configure main sudo Configuration.
+  lineinfile:
+    dest: /etc/sudoers
+    line: "{{ item.line }}"
+    regexp: "{{ item.regex }}"
+    state: "{{ item.state }}"
+    backup: true
+    insertbefore: '.*includedir.*'
+    validate: 'visudo -cf %s'
+  with_items: "{{ common_sudo_defaults }}"
+
+- name: Configure additional sudoers Permissions.
+  template:
+    dest: /etc/sudoers.d/
+    src: "{{ item }}"
+    mode: 0440
+    owner: root
+    group: root
+    validate: 'visudo -cf %s'
+  with_fileglob:
+    - "{{ common_sudo_sudoers_files }}"

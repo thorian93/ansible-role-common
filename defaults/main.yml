@@ -22,11 +22,21 @@ common_scripting_configure: false
 common_software_configure: false
 common_users_configure: false
 common_timezone_configure: false
-common_sudoers_configure: false
+common_sudo_configure: false
 common_vim_configure: false
 
-# Sudoers
-common_sudoers_files: "*_sudoers"
+# Sudo
+common_sudo_sudoers_files: "*_sudoers"
+common_sudo_defaults:
+  - line: "# Defaults targetpw # ask for the password of the target user i.e. root"
+    regex: '^Defaults\s*targetpw.*'
+    state: 'present'
+  - line: "# ALL ALL=(ALL) ALL # WARNING! Only use this together with 'Defaults targetpw'!"
+    regex: '^ALL\s*ALL=\(ALL\)\s*ALL.*'
+    state: 'present'
+  - line: '%{{ common_admin_group }} ALL=({% if ansible_os_family == "Debian" %}ALL:ALL{% else %}ALL{% endif %}) ALL'
+    regex: '(# |^)\%{{ common_admin_group }}\s*ALL=\({% if ansible_os_family == "Debian" %}ALL:ALL{% else %}ALL{% endif %}\)\s*ALL.*'
+    state: 'present'
 
 # Optional Apps
 common_optional_apps_install: false

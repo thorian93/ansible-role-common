@@ -34,14 +34,27 @@ Available variables are listed below, along with default values (see `defaults/m
     common_software_configure: false
     common_users_configure: false
     common_timezone_configure: false
-    common_sudoers_configure: false
+    common_sudo_configure: false
     common_vim_configure: false
 
 Enable and disable managed sections of this role.
 
-    common_sudoers_files: "*_sudoers"
+    common_sudo_sudoers_files: "*_sudoers"
 
 Configure lookup path for custom sudoers files.
+
+    common_sudo_defaults:
+      - line: "# Defaults targetpw # ask for the password of the target user i.e. root"
+        regex: '^Defaults\stargetpw.*'
+        state: 'present'
+      - line: "# ALL ALL=(ALL) ALL # WARNING! Only use this together with 'Defaults targetpw'!"
+        regex: '^ALL\sALL=\(ALL\)\sALL.*'
+        state: 'present'
+      - line: '%{{ common_admin_group }} ALL=({% if ansible_os_family == "Debian" %}ALL:ALL{% else %}ALL{% endif %}) ALL'
+        regex: '(# |^)\%{{ common_admin_group }}\sALL=\({% if ansible_os_family == "Debian" %}ALL:ALL{% else %}ALL{% endif %}\)\sALL.*'
+        state: 'present'
+
+Configure sudo options. There is a default set of three options which basically ensure the common sudo behaviour known by Debian derivates works on any distribution.
 
     common_optional_apps_install: false
 
