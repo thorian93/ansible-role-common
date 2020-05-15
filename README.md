@@ -6,6 +6,8 @@ This role manages several parts of a Linux system which are not worth their own 
 
 When managing DNS resolution with this role be aware of the following: On Ubuntu this role will remove the symlink on /etc/resolv.conf if it exists and replace it with a static file. The symlink originates in the `systemd-resolved` daemon. Managing that daemon is at least currently out of scope for this role. I know this not a beautiful solution but it works for me. If you know how to handle this better feel free to contact me or create a PR.
 
+When managing sudo confioguration this role has some defaults you might want to review before applying.
+
 ## Known issues
 
 - Fedora 30: The dropping support for Python 2 in Fedora causes problems for Ansible. This can be fixed by setting the `ansible_python_interpreter` variable to the appropriate Python 3 binary.
@@ -34,14 +36,27 @@ Available variables are listed below, along with default values (see `defaults/m
     common_software_configure: false
     common_users_configure: false
     common_timezone_configure: false
-    common_sudoers_configure: false
+    common_sudo_configure: false
     common_vim_configure: false
 
 Enable and disable managed sections of this role.
 
-    common_sudoers_files: "*_sudoers"
+    common_sudo_sudoers_files: "*_sudoers"
 
 Configure lookup path for custom sudoers files.
+
+    common_sudo_defaults:
+      - line: "# Defaults targetpw # ask for the password of the target user i.e. root"
+        regex: '^Defaults\stargetpw.*'
+        state: 'present'
+      - line: "# ALL ALL=(ALL) ALL # WARNING! Only use this together with 'Defaults targetpw'!"
+        regex: '^ALL\sALL=\(ALL\)\sALL.*'
+        state: 'present'
+      - line: '%{{ common_admin_group }} ALL=({% if ansible_os_family == "Debian" %}ALL:ALL{% else %}ALL{% endif %}) ALL'
+        regex: '(# |^)\%{{ common_admin_group }}\sALL=\({% if ansible_os_family == "Debian" %}ALL:ALL{% else %}ALL{% endif %}\)\sALL.*'
+        state: 'present'
+
+Configure sudo options. There is a default set of three options which basically ensure the common sudo behaviour known by Debian derivates works on any distribution.
 
     common_optional_apps_install: false
 
