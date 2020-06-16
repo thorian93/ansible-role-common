@@ -3,13 +3,13 @@
   lineinfile:
    dest: /etc/bash.bashrc
    line: "{{ item }}"
-   create: yes
+   create: 'true'
   with_items: "{{ shopt_options }}"
 
 - name: Configure bash completion.
   blockinfile:
    dest: /etc/bash.bashrc
-   create: yes
+   create: 'true'
    marker: "# {mark} ANSIBLE MANAGED BLOCK"
    content: |
     if ! shopt -oq posix; then

@@ -12,7 +12,7 @@
     name: "{{ item.name }}"
     password: "{{ item.password }}"
     update_password: "{{ item.update_password }}"
-    groups: "{{item.user_groups}}"
+    groups: "{{ item.user_groups }}"
     shell: "{{ item.shell }}"
     system: "{{ item.system }}"
     state: "{{ item.state }}"

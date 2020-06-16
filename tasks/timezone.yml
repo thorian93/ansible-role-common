@@ -6,18 +6,18 @@
 
 - name: Check for a zoneinfo file
   stat:
-    path: /usr/share/zoneinfo/{{common_timezone}}
+    path: /usr/share/zoneinfo/{{ common_timezone }}
   register: common_zoneinfo
 
 - name: Alert if zoneinfo is not there.
-  fail: msg="{{common_timezone}} is not valid (/usr/share/zoneinfo/{{common_timezone}} does not exist)"
+  fail: msg="{{ common_timezone }} is not valid (/usr/share/zoneinfo/{{ common_timezone }} does not exist)"
   when: not (common_zoneinfo.stat.exists is defined and common_zoneinfo.stat.exists)
 
 - name: Symlink the correct localtime (/etc/localtime)
   file:
-    src: /usr/share/zoneinfo/{{common_timezone}}
+    src: /usr/share/zoneinfo/{{ common_timezone }}
     dest: /etc/localtime
-    force: yes
+    force: 'true'
     state: link
     owner: root
     group: root

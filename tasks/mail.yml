@@ -19,7 +19,7 @@
     line: "inet_interfaces = localhost"
     regexp: "^.*inet_interfaces ="
     state: present
-    backup: yes
+    backup: 'true'
   notify:
     - restart postfix
 
@@ -29,6 +29,6 @@
     line: "inet_protocols = ipv4"
     regexp: "^.*inet_protocols ="
     state: present
-    backup: yes
+    backup: 'true'
   notify:
     - restart postfix

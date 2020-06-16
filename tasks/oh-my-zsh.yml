@@ -8,13 +8,13 @@
   git:
     repo: "{{ common_zsh_source }}"
     dest: "{{ common_zsh_path }}"
-    update: yes
+    update: 'true'
 
 - name: Copy .zshrc.
   template:
     src: zshrc.j2
     dest: "/{% if 'root' in item %}{{ item }}{% else %}home/{{ item }}{% endif %}/.zshrc"
-    backup: yes
+    backup: 'true'
   with_items: "{{ common_zsh_users }}"
 
 - name: Determine zsh binary location.

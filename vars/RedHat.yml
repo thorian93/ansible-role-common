@@ -1,12 +1,8 @@
 ---
 common_apps_derivate:
-# I
   - iptstate
-# T
   - tig
-# X
   - xz
-# Y
   - yum-utils
 
 common_timezone_package: tzdata

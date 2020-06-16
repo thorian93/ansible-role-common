@@ -2,14 +2,14 @@
 - name: Configure shopt Preferences.
   lineinfile:
     dest: /etc/bashrc
-    line: "{{item}}"
-    create: yes
-  with_items: "{{shopt_options}}"
+    line: "{{ item }}"
+    create: 'true'
+  with_items: "{{ shopt_options }}"
 
 - name: Configure Bash Completion.
   blockinfile:
     dest: /etc/bashrc
-    create: yes
+    create: 'true'
     marker: "# {mark} ANSIBLE MANAGED BLOCK"
     content: |
      if ! shopt -oq posix; then

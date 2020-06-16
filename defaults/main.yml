@@ -27,9 +27,27 @@ common_timezone_configure: false
 common_sudo_configure: false
 common_vim_configure: false
 
+# Users
+## Users can be defined on several levels and will be concatenated
+common_global_users_present: []
+  # - name: johndoe
+  #   password: []
+  #   update_password: always
+  #   keys: []
+  #     - foobar
+  #   shell: /bin/bash
+  #   user_groups: []
+  #   append: yes
+  #   system: no
+  #   state: present
+  #   remove: no
+common_os_users_present: []
+common_system_users_present: []
+common_stage_users_present: []
+common_role_users_present: []
+
 # Sudo
 common_sudo_sudoers_files: []
-
 ## Users can be defined on several levels and will be concatenated
 common_sudo_passwordless_users_global: []
   # - johndoe
@@ -37,7 +55,6 @@ common_sudo_passwordless_users_os: []
 common_sudo_passwordless_users_system: []
 common_sudo_passwordless_users_stage: []
 common_sudo_passwordless_users_role: []
-
 common_sudo_defaults:
   - line: "# Defaults targetpw # ask for the password of the target user i.e. root"
     regex: '^Defaults\s*targetpw.*'
@@ -74,12 +91,12 @@ common_timezone: "Europe/Berlin"
 # Mail Aliases
 common_etc_aliases:
   - name: "Redirect root mails."
-    line: 'root:		root'
+    line: 'root: root'
     regexp: '^root\:.*'
     insertbefore: EOF
     setype: etc_aliases_t
     state: present
-    backup: yes
+    backup: 'true'
 
 # Scripting
 scripting_path: /opt/control/scripts
@@ -90,10 +107,11 @@ shopt_options:
   - shopt -s cdspell
   - shopt -s nocaseglob
 
+# Oh my ZSH
 common_zsh_users: root
 common_zsh_theme: clean
 common_zsh_path: /opt/oh-my-zsh
 common_zsh_plugins:
- - git
- - rsync
- - wd
+  - git
+  - rsync
+  - wd

@@ -2,45 +2,27 @@
 common_zsh_source: "https://github.com/robbyrussell/oh-my-zsh.git"
 
 common_minimal_apps:
-# B
   - bzip2
-# C
   - ca-certificates
-# G
   - git
   - gzip
-# H
   - htop
-# L
   - lsof
-# M
   - mlocate
   - mtr
-# N
   - net-tools
   - ncdu
-# P
   - parted
   - postfix
-# R
   - rsync
-# S
   - screen
-# T
   - tree
-# U
   - unzip
-# V
   - vim
-# W
   - wget
-# Z
   - zsh
 
 common_optional_apps:
-# G
   - glances
-# M
   - mc
-# P
   - powertop

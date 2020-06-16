@@ -1,6 +1,4 @@
 ---
 common_apps_distribution:
-# L
   - libselinux-python
-# U
   - util-linux-user

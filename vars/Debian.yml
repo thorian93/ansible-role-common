@@ -1,36 +1,23 @@
 ---
 common_apps_derivate:
-# A
   - apt-transport-https
   - aptitude
-# B
   - bash-completion
-# D
   - debian-goodies
-# H
   - hddtemp
-# I
   - iftop
   - inotify-tools
   - iptstate
-# L
   - lsb-release
-# M
   - mailutils
-# N
   - nmon
-# P
   - p7zip
   - python-apt
-# T
   - tig
   - tuptime
-# U
   - unar
   - unison
-# W
   - whois
-# X
   - xz-utils
 
 common_timezone_package: tzdata
