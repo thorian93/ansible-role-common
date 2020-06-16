@@ -41,9 +41,38 @@ Available variables are listed below, along with default values (see `defaults/m
 
 Enable and disable managed sections of this role.
 
-    common_sudo_sudoers_files: "*_sudoers"
 
-Configure lookup path for custom sudoers files.
+    common_global_users_present: []
+      # - name: johndoe
+      #   password: []
+      #   update_password: always
+      #   keys: []
+      #     - foobar
+      #   shell: /bin/bash
+      #   user_groups: []
+      #   append: yes
+      #   system: no
+      #   state: present
+      #   remove: no
+    common_os_users_present: []
+    common_system_users_present: []
+    common_stage_users_present: []
+    common_role_users_present: []
+
+Users can be defined on several levels. This roles defines five levels based on my experience. All above variables will be concatenated so every system gets the exact users intended for it. The commented block shows the currently available values to be configured for a user.
+
+    common_sudo_sudoers_files: []
+
+Configure custom sudoers files to be uploaded to `/etc/sudoers.d/`.
+
+    common_sudo_passwordless_users_global: []
+      # - johndoe
+    common_sudo_passwordless_users_os: []
+    common_sudo_passwordless_users_system: []
+    common_sudo_passwordless_users_stage: []
+    common_sudo_passwordless_users_role: []
+
+See the user variables above for the logic behind these variables. Users listed here will have passwordless sudo activated.
 
     common_sudo_defaults:
       - line: "# Defaults targetpw # ask for the password of the target user i.e. root"
@@ -55,8 +84,11 @@ Configure lookup path for custom sudoers files.
       - line: '%{{ common_admin_group }} ALL=({% if ansible_os_family == "Debian" %}ALL:ALL{% else %}ALL{% endif %}) ALL'
         regex: '(# |^)\%{{ common_admin_group }}\sALL=\({% if ansible_os_family == "Debian" %}ALL:ALL{% else %}ALL{% endif %}\)\sALL.*'
         state: 'present'
+      - line: "#includedir /etc/sudoers.d"
+        regex: '^#includedir\s*/etc/sudoers.d.*'
+        state: 'present'
 
-Configure sudo options. There is a default set of three options which basically ensure the common sudo behaviour known by Debian derivates works on any distribution.
+Configure sudo options. There is a default set of three options which ensure that sudo asks for the source user password rather than the destination user password. The fourth makes sure that configuration files in `/etc/sudoers.d/` are included.
 
     common_optional_apps_install: false
 
