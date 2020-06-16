@@ -48,6 +48,9 @@ common_sudo_defaults:
   - line: '%{{ common_admin_group }} ALL=({% if ansible_os_family == "Debian" %}ALL:ALL{% else %}ALL{% endif %}) ALL'
     regex: '(# |^)\%{{ common_admin_group }}\s*ALL=\({% if ansible_os_family == "Debian" %}ALL:ALL{% else %}ALL{% endif %}\)\s*ALL.*'
     state: 'present'
+  - line: "#includedir /etc/sudoers.d"
+    regex: '^#includedir\s*/etc/sudoers.d.*'
+    state: 'present'
 
 # Optional Apps
 common_optional_apps_install: false
