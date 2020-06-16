@@ -10,6 +10,15 @@
     validate: 'visudo -cf %s'
   with_items: "{{ common_sudo_defaults }}"
 
+- name: Configure passwordless sudoers Permissions.
+  template:
+    dest: /etc/sudoers.d/passwordless_sudoers
+    src: passwordless_sudoers.j2
+    mode: 0440
+    owner: root
+    group: root
+    validate: 'visudo -cf %s'
+
 - name: Configure additional sudoers Permissions.
   template:
     dest: /etc/sudoers.d/
@@ -18,5 +27,5 @@
     owner: root
     group: root
     validate: 'visudo -cf %s'
-  with_fileglob:
+  with_items:
     - "{{ common_sudo_sudoers_files }}"

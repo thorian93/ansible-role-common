@@ -8,6 +8,8 @@ common_stable_os:
   - CentOS 8
   - Fedora 30
   - Fedora 31
+  - SLES 11
+  - SLES 12
   - openSUSE Leap 15
   # - openSUSE Leap 42
 
@@ -26,7 +28,16 @@ common_sudo_configure: false
 common_vim_configure: false
 
 # Sudo
-common_sudo_sudoers_files: "*_sudoers"
+common_sudo_sudoers_files: []
+
+## Users can be defined on several levels and will be concatenated
+common_sudo_passwordless_users_global: []
+  # - johndoe
+common_sudo_passwordless_users_os: []
+common_sudo_passwordless_users_system: []
+common_sudo_passwordless_users_stage: []
+common_sudo_passwordless_users_role: []
+
 common_sudo_defaults:
   - line: "# Defaults targetpw # ask for the password of the target user i.e. root"
     regex: '^Defaults\s*targetpw.*'
@@ -49,7 +60,7 @@ common_dns_search: []
 common_dns_servers:
   - 1.1.1.1
   - 1.0.0.1
-common_dns_options:
+common_dns_options: []
   # - "timeout:3"
   # - "attempts:2"
   # - "rotate"
