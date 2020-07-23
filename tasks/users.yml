@@ -18,6 +18,7 @@
     state: "{{ item.state }}"
   with_items: "{{ common_users_present }}"
   when: common_users_present != ""
+  no_log: 'true'
 
 - name: Add Public Keys for users.
   authorized_key:
@@ -28,6 +29,7 @@
     - "{{ common_users_present }}"
     - keys
   when: common_users_present != ""
+  no_log: 'true'
 
 - name: Remove users.
   user:
@@ -36,3 +38,4 @@
     remove: "{{ item.remove }}"
   with_items: "{{ common_users_absent }}"
   when: common_users_absent != ""
+  no_log: 'true'
