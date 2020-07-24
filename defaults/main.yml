@@ -99,8 +99,19 @@ common_etc_aliases:
     backup: 'true'
 
 # Scripting
-scripting_path: /opt/control/scripts
-config_path: /opt/control/config
+common_scripting_path: /opt/control/scripts
+common_config_path: /opt/control/config
+common_scripting_scripts_global: []
+  # - src:
+  #   dest:
+  #   owner:
+  #   group:
+  #   mode:
+  #   state: 
+common_scripting_scripts_os: []
+common_scripting_scripts_system: []
+common_scripting_scripts_stage: []
+common_scripting_scripts_role: []
 
 # Shopt options
 shopt_options:
