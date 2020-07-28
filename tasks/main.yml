@@ -61,10 +61,6 @@
   include_tasks: users.yml
   when: common_users_configure
 
-- name: Include Sudo Management playbook
-  include_tasks: sudo.yml
-  when: common_sudo_configure
-
 - name: Include Crontabs Management playbook
   include_tasks: crontabs.yml
   when: common_crontabs_configure
