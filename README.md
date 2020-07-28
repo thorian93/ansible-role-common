@@ -6,8 +6,6 @@ This role manages several parts of a Linux system which are not worth their own 
 
 When managing DNS resolution with this role be aware of the following: On Ubuntu this role will remove the symlink on /etc/resolv.conf if it exists and replace it with a static file. The symlink originates in the `systemd-resolved` daemon. Managing that daemon is at least currently out of scope for this role. I know this not a beautiful solution but it works for me. If you know how to handle this better feel free to contact me or create a PR.
 
-When managing sudo configuration this role has some defaults you might want to review before applying.
-
 ## Known issues
 
 - Fedora 30: The dropping support for Python 2 in Fedora causes problems for Ansible. This can be fixed by setting the `ansible_python_interpreter` variable to the appropriate Python 3 binary.
@@ -36,7 +34,6 @@ Available variables are listed below, along with default values (see `defaults/m
     common_software_configure: false
     common_users_configure: false
     common_timezone_configure: false
-    common_sudo_configure: false
     common_vim_configure: false
 
 Enable and disable managed sections of this role.
@@ -60,35 +57,6 @@ Enable and disable managed sections of this role.
     common_role_users_present: []
 
 Users can be defined on several levels. This roles defines five levels based on my experience. All above variables will be concatenated so every system gets the exact users intended for it. The commented block shows the currently available values to be configured for a user.
-
-    common_sudo_sudoers_files: []
-
-Configure custom sudoers files to be uploaded to `/etc/sudoers.d/`.
-
-    common_sudo_passwordless_users_global: []
-      # - johndoe
-    common_sudo_passwordless_users_os: []
-    common_sudo_passwordless_users_system: []
-    common_sudo_passwordless_users_stage: []
-    common_sudo_passwordless_users_role: []
-
-See the user variables above for the logic behind these variables. Users listed here will have passwordless sudo activated.
-
-    common_sudo_defaults:
-      - line: "# Defaults targetpw # ask for the password of the target user i.e. root"
-        regex: '^Defaults\stargetpw.*'
-        state: 'present'
-      - line: "# ALL ALL=(ALL) ALL # WARNING! Only use this together with 'Defaults targetpw'!"
-        regex: '^ALL\sALL=\(ALL\)\sALL.*'
-        state: 'present'
-      - line: '%{{ common_admin_group }} ALL=({% if ansible_os_family == "Debian" %}ALL:ALL{% else %}ALL{% endif %}) ALL'
-        regex: '(# |^)\%{{ common_admin_group }}\sALL=\({% if ansible_os_family == "Debian" %}ALL:ALL{% else %}ALL{% endif %}\)\sALL.*'
-        state: 'present'
-      - line: "#includedir /etc/sudoers.d"
-        regex: '^#includedir\s*/etc/sudoers.d.*'
-        state: 'present'
-
-Configure sudo options. There is a default set of three options which ensure that sudo asks for the source user password rather than the destination user password. The fourth makes sure that configuration files in `/etc/sudoers.d/` are included.
 
     common_optional_apps_install: false
 
