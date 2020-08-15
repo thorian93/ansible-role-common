@@ -8,6 +8,7 @@ common_stable_os:
   - CentOS 8
   - Fedora 30
   - Fedora 31
+  - Fedora 32
   - SLES 11
   - SLES 12
   - openSUSE Leap 15
