@@ -20,15 +20,18 @@
 
 - name: Include Derivate specific Variables.
   include_vars: "{{ ansible_os_family }}.yml"
-  ignore_errors: true
+  changed_when: false
+  failed_when: false
 
 - name: Include Distribution specific Variables.
   include_vars: "{{ ansible_distribution }}.yml"
-  ignore_errors: true
+  changed_when: false
+  failed_when: false
 
 - name: Include Distribution Version specific Variables.
   include_vars: "{{ ansible_distribution }}{{ ansible_distribution_major_version }}.yml"
-  ignore_errors: true
+  changed_when: false
+  failed_when: false
 
 - name: Include OS Family specific Playbook.
   include_tasks: "{{ ansible_os_family }}.yml"
