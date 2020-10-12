@@ -1,0 +1,11 @@
+---
+stages:
+  - linting
+
+linting:
+  stage: linting
+  tags:
+    - shell
+  script:
+    - ansible-lint tasks/*.yml
+    - yamllint tasks/*.yml
