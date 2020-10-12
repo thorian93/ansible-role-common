@@ -9,7 +9,7 @@ When managing DNS resolution with this role be aware of the following: On Ubuntu
 ## Known issues
 
 - Fedora 30: The dropping support for Python 2 in Fedora causes problems for Ansible. This can be fixed by setting the `ansible_python_interpreter` variable to the appropriate Python 3 binary.
-- **openSUSE Leap 15 and 42**: A missing dependency does not allow installation of a dependent tool. A workaround is in place but does not work properly.
+- **opensuse 15.2 and 42.2**: A missing dependency does not allow installation of a dependent tool. A workaround is in place but does not work properly.
 
 ## Requirements
 
@@ -98,8 +98,8 @@ Configure the timezone.
 
 Configure /etc/aliases.
 
-    scripting_path: /opt/control/scripts
-    config_path: /opt/control/config
+    common_scripting_path: /opt/control/scripts
+    common_config_path: /opt/control/config
 
 Configure general paths.
 
