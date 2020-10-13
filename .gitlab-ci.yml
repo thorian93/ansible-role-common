@@ -1,11 +1,45 @@
 ---
-stages:
-  - linting
+variables:
+  GITHUB_REPO: "git@github.com:thorian93/ansible-role-common.git"
 
-linting:
+stages:
+  - cleanup
+  - linting
+  - deploy
+
+clean-build-area:
+  stage: cleanup
+  tags:
+    - shell
+  script:
+    - rm -rf ./*
+    - rm -rf ./.git/
+
+ansible-lint:
   stage: linting
   tags:
     - shell
   script:
     - ansible-lint tasks/*.yml
+
+yaml-lint:
+  stage: linting
+  tags:
+    - shell
+  script:
     - yamllint tasks/*.yml
+
+shell-lint:
+  stage: linting
+  tags:
+    - shell
+  script:
+    - find ./ -name "*.sh" -exec shellcheck {} \;
+
+deploy-github:
+  stage: deploy
+  tags:
+    - shell
+  script:
+    - git remote set-url --push origin $GITHUB_REPO
+    - git push origin HEAD:$CI_COMMIT_REF_NAME
