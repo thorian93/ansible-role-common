@@ -20,7 +20,7 @@ ansible-lint:
   tags:
     - shell
   script:
-    - ansible-lint tasks/*.yml
+    - ansible-lint ./
 
 yaml-lint:
   stage: linting
