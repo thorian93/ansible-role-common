@@ -4,6 +4,7 @@ variables:
 
 stages:
   - cleanup
+  - security
   - linting
   - deploy
 
@@ -14,6 +15,14 @@ clean-build-area:
   script:
     - rm -rf ./*
     - rm -rf ./.git/
+
+secret-scan:
+  stage: security
+  tags:
+    - shell
+  script:
+    - git clone https://gitlab-ci-token:${CI_JOB_TOKEN}@git.cgn.rg.lan/ansible/ansible-scripts.git scripts
+    - ./scripts/secret-finder.sh
 
 ansible-lint:
   stage: linting
