@@ -7,6 +7,7 @@ stages:
   - security
   - linting
   - deploy
+  - finish
 
 clean-build-area:
   stage: cleanup
@@ -21,7 +22,7 @@ secret-scan:
   tags:
     - shell
   script:
-    - git clone https://gitlab-ci-token:${CI_JOB_TOKEN}@git.cgn.rg.lan/ansible/ansible-scripts.git scripts
+    - git clone https://gitlab-ci-token:${CI_JOB_TOKEN}@${GITLAB_HOST}/ansible/ansible-scripts.git scripts
     - ./scripts/secret-finder.sh
 
 ansible-lint:
@@ -50,5 +51,13 @@ deploy-github:
   tags:
     - shell
   script:
-    - git remote set-url --push origin $GITHUB_REPO
-    - git push origin HEAD:$CI_COMMIT_REF_NAME
+    - git remote set-url --push origin ${GITHUB_REPO}
+    - git push origin HEAD:${CI_COMMIT_REF_NAME}
+
+open-issue:
+  stage: finish
+  tags:
+    - shell
+  script:
+    - curl --silent --request POST --header "PRIVATE-TOKEN:${PRIVATE_TOKEN}" "${GITLAB_URL}/api/v4/projects/${CI_PROJECT_ID}/issues?title=Pipeline%20${CI_PIPELINE_ID}%20failed&assignee_ids=2&labels=bug"
+  when: on_failure
