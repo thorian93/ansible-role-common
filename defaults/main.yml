@@ -9,8 +9,8 @@ common_stable_os:
   - Fedora 32
   - SLES 11
   - SLES 12
-  - opensuse 15.2
-  # - opensuse 42.2
+  # - openSUSE Leap 15
+  # - openSUSE Leap 42
   - Ubuntu 16
   - Ubuntu 18
   - Ubuntu 20
@@ -20,7 +20,6 @@ common_crontabs_configure: false
 common_disks_configure: false
 common_dns_configure: false
 common_groups_configure: false
-common_mail_configure: false
 common_zsh_configure: false
 common_scripting_configure: false
 common_software_configure: false
@@ -65,16 +64,6 @@ common_dns_options: []
 
 # Timezone
 common_timezone: "Europe/Berlin"
-
-# Mail Aliases
-common_etc_aliases:
-  - name: "Redirect root mails."
-    line: 'root: root'
-    regexp: '^root\:.*'
-    insertbefore: EOF
-    setype: etc_aliases_t
-    state: present
-    backup: 'true'
 
 # Scripting
 common_scripting_path: /opt/control/scripts

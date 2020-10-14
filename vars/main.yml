@@ -13,7 +13,6 @@ common_minimal_apps:
   - net-tools
   - ncdu
   - parted
-  - postfix
   - rsync
   - screen
   - tree

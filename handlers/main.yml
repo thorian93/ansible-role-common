@@ -1,8 +1,0 @@
----
-- name: run newaliases
-  command: newaliases
-
-- name: restart postfix
-  service:
-    name: postfix
-    state: restarted
