@@ -10,5 +10,5 @@
 - name: "Disable disk checks on all ext4 disk devices."
   shell: "tune2fs -c 0 -i 0 {{ item }}"
   args:
-    warn: 'no'
+    warn: 'false'
   with_items: "{{ common_disks_list.stdout_lines }}"
