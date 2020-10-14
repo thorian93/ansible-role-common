@@ -1,19 +1,19 @@
 ---
-- name: Make sure timezone package is installed.
+- name: "Make sure timezone package is installed."
   package:
     name: "{{ common_timezone_package }}"
     state: present
 
-- name: Check for a zoneinfo file
+- name: "Check for a zoneinfo file."
   stat:
     path: /usr/share/zoneinfo/{{ common_timezone }}
   register: common_zoneinfo
 
-- name: Alert if zoneinfo is not there.
+- name: "Alert if zoneinfo is not there."
   fail: msg="{{ common_timezone }} is not valid (/usr/share/zoneinfo/{{ common_timezone }} does not exist)"
   when: not (common_zoneinfo.stat.exists is defined and common_zoneinfo.stat.exists)
 
-- name: Symlink the correct localtime (/etc/localtime)
+- name: "Symlink the correct localtime (/etc/localtime)."
   file:
     src: /usr/share/zoneinfo/{{ common_timezone }}
     dest: /etc/localtime

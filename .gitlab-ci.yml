@@ -30,7 +30,7 @@ ansible-lint:
   tags:
     - shell
   script:
-    - ansible-lint ./
+    - ansible-lint -x 301,305 ./
 
 yaml-lint:
   stage: linting

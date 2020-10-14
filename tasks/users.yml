@@ -1,5 +1,5 @@
 ---
-- name: Concatenate Users Presence Variables.
+- name: "Concatenate Users Presence Variables."
   set_fact:
     common_users_present: >-
       {{ common_global_users_present | default('') | list  +
@@ -8,7 +8,7 @@
       common_stage_users_present | default('') | list  +
       common_role_users_present | default('') | list }}
 
-- name: Concatenate Users Absence Variables.
+- name: "Concatenate Users Absence Variables."
   set_fact:
     common_users_absent: >-
       {{ common_global_users_absent | default('') | list  +
@@ -17,7 +17,7 @@
       common_stage_users_absent | default('') | list  +
       common_role_users_absent | default('') | list }}
 
-- name: Create users.
+- name: "Create Users."
   user:
     name: "{{ item.name }}"
     password: "{{ item.password }}"
@@ -30,7 +30,7 @@
   when: common_users_present | length
   no_log: 'true'
 
-- name: Add Public Keys for users.
+- name: "Add Public Keys for Users."
   authorized_key:
     user: "{{ item.0.name }}"
     state: "{{ item.0.state }}"
@@ -41,7 +41,7 @@
   when: common_users_present | length
   no_log: 'true'
 
-- name: Remove users.
+- name: "Remove Users."
   user:
     name: "{{ item.name }}"
     state: "{{ item.state }}"

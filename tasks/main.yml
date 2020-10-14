@@ -1,81 +1,77 @@
 ---
-- name: Preflight - Fail if target host is not stable for this Role.
+- name: "Preflight - Fail if target host is not stable for this Role."
   fail:
     msg: "This role is not stable for the target operating system, {{ ansible_distribution }} {{ ansible_distribution_major_version }}."
   when: (ansible_distribution is not defined) or
         (ansible_distribution_version is not defined) or
         (ansible_distribution+" "+ansible_distribution_major_version not in common_stable_os)
 
-- name: Set hostname.
+- name: "Set hostname."
   hostname:
-    name: "{{ host_name }}"
+    name: "{{ inventory_hostname }}"
 
-- name: Configure /etc/hosts.
+- name: "Configure /etc/hosts."
   lineinfile:
     path: /etc/hosts
-    line: "127.0.0.1 {{ host_name }} localhost"
+    line: "127.0.0.1 {{ inventory_hostname }} localhost"
     regexp: "^127.0.0.1"
     state: present
   notify: restart postfix
 
-- name: Include Derivate specific Variables.
+- name: "Include Derivate specific Variables."
   include_vars: "{{ ansible_os_family }}.yml"
   changed_when: false
   failed_when: false
 
-- name: Include Distribution specific Variables.
+- name: "Include Distribution specific Variables."
   include_vars: "{{ ansible_distribution }}.yml"
   changed_when: false
   failed_when: false
 
-- name: Include Distribution Version specific Variables.
+- name: "Include Distribution Version specific Variables."
   include_vars: "{{ ansible_distribution }}{{ ansible_distribution_major_version }}.yml"
   changed_when: false
   failed_when: false
 
-- name: Include OS Family specific Playbook.
+- name: "Include OS Family specific Playbook."
   include_tasks: "{{ ansible_os_family }}.yml"
 
-- name: Include Software Management Playbook
+- name: "Include Software Management Playbook."
   include_tasks: software.yml
   when: common_software_configure
 
-- name: Include DNS Nameservers Management Playbook
+- name: "Include DNS Nameservers Management Playbook."
   include_tasks: dns.yml
   when: common_dns_configure
 
-- name: Include Timezone Management Playbook
+- name: "Include Timezone Management Playbook."
   include_tasks: timezone.yml
   when: common_timezone_configure
 
-- name: Include Mail Management Playbook
-  include_tasks: mail.yml
-  when: common_mail_configure
-
-- name: Include Disks Management Playbook
+- name: "Include Disks Management Playbook."
   include_tasks: disks.yml
   when: common_disks_configure
 
-- name: Include Groups Management playbook
+- name: "Include Groups Management Playbook."
   include_tasks: groups.yml
   when: common_groups_configure
 
-- name: Include Users Management playbook
+- name: "Include Users Management Playbook."
   include_tasks: users.yml
   when: common_users_configure
 
-- name: Include Crontabs Management playbook
+- name: "Include Crontabs Management Playbook."
   include_tasks: crontabs.yml
   when: common_crontabs_configure
 
-- name: Include Scripting Management playbook
+- name: "Include Scripting Management Playbook."
   include_tasks: scripting.yml
   when: common_scripting_configure
 
-- name: Include VIM playbook
+- name: "Include VIM Playbook."
   include_tasks: vim.yml
   when: common_vim_configure
 
-- name: Include oh-my-zsh playbook
+- name: "Include oh-my-zsh Playbook."
   include_tasks: oh-my-zsh.yml
   when: common_zsh_configure

@@ -1,12 +1,12 @@
 ---
-- name: Configure shopt preferences.
+- name: "Configure shopt Preferences."
   lineinfile:
    dest: /etc/bash.bashrc
    line: "{{ item }}"
    create: 'true'
   with_items: "{{ shopt_options }}"
 
-- name: Configure bash completion.
+- name: "Configure Bash Completion."
   blockinfile:
    dest: /etc/bash.bashrc
    create: 'true'

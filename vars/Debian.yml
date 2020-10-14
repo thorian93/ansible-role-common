@@ -3,7 +3,6 @@ common_apps_derivate:
   - apt-transport-https
   - aptitude
   - bash-completion
-  - check-support-status
   - debian-goodies
   - hddtemp
   - iftop

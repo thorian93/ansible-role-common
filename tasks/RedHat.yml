@@ -1,12 +1,12 @@
 ---
-- name: Configure shopt Preferences.
+- name: "Configure shopt Preferences."
   lineinfile:
     dest: /etc/bashrc
     line: "{{ item }}"
     create: 'true'
   with_items: "{{ shopt_options }}"
 
-- name: Configure Bash Completion.
+- name: "Configure Bash Completion."
   blockinfile:
     dest: /etc/bashrc
     create: 'true'
@@ -20,7 +20,7 @@
         fi
      fi
 
-- name: Enable EPEL Repositories.
+- name: "Enable EPEL Repositories."
   package:
     name: epel-release
     state: present

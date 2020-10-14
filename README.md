@@ -28,7 +28,6 @@ Available variables are listed below, along with default values (see `defaults/m
     common_disks_configure: false
     common_dns_configure: false
     common_groups_configure: false
-    common_mail_configure: false
     common_zsh_configure: false
     common_scripting_configure: false
     common_software_configure: false
@@ -37,7 +36,6 @@ Available variables are listed below, along with default values (see `defaults/m
     common_vim_configure: false
 
 Enable and disable managed sections of this role.
-
 
     common_global_users_present: []
       # - name: johndoe
@@ -56,7 +54,7 @@ Enable and disable managed sections of this role.
     common_stage_users_present: []
     common_role_users_present: []
 
-Users can be defined on several levels. This roles defines five levels based on my experience. All above variables will be concatenated so every system gets the exact users intended for it. The commented block shows the currently available values to be configured for a user.
+Users can be defined on several levels. This role defines five levels based on my personal experience. All above variables will be concatenated so every system gets the exact users intended for it. The variables are intended to be used in the above shown order. So for global users that should be present on any machine in your inventory you want to use `common_global_users_present` while the other stages can be used as seen fit. The commented block shows the currently available values to be configured for a user.
 
     common_optional_apps_install: false
 
@@ -86,17 +84,6 @@ Configure additional options for resolv.conf
     common_timezone: "Europe/Berlin"
 
 Configure the timezone.
-
-    common_etc_aliases:
-      - name: "Redirect root mails."
-        line: 'root:		root'
-        regexp: '^root\:.*'
-        insertbefore: EOF
-        setype: etc_aliases_t
-        state: present
-        backup: yes
-
-Configure /etc/aliases.
 
     common_scripting_path: /opt/control/scripts
     common_config_path: /opt/control/config
@@ -136,7 +123,7 @@ None.
 
 This role ensures that it is not used against unsupported or untested operating systems by checking, if the right distribution name and major version number are present in a dedicated variable named like `<role-name>_stable_os`. You can find the variable in the role's default variable file at `defaults/main.yml`:
 
-    common_stable_os:
+    role_stable_os:
       - Debian 10
       - Ubuntu 18
       - CentOS 7

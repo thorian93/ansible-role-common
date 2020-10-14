@@ -1,5 +1,5 @@
 ---
-- name: Configure crontabs.
+- name: "Configure crontabs."
   cron:
     name: "{{ item.name }}"
     job: "{{ item.job }}"

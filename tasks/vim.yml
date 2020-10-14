@@ -1,5 +1,5 @@
 ---
-- name: Configure VIM.
+- name: "Configure VIM."
   lineinfile:
     dest: "{{ common_vimrc_path }}"
     line: "let g:skip_defaults_vim = 1"

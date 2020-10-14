@@ -3,6 +3,7 @@ galaxy_info:
   author: Thorian93
   description: Ansible Role Common
   license: "license (MIT)"
+
   min_ansible_version: 2.5
 
   galaxy_tags:
