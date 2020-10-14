@@ -1,8 +1,14 @@
 ---
-- name: Get all ext4 disk devices.
-  shell: "df -Pt ext4 | cut -d ' ' -f 1 | tail -n +2"
+- name: "Get all ext4 disk devices."
+  shell: "set -o pipefail && df -Pt ext4 | cut -d ' ' -f 1 | tail -n +2"
+  args:
+    executable: /bin/bash
   register: common_disks_list
+  changed_when: common_disks_list.rc == 0
+  failed_when: common_disks_list.rc > 1
 
-- name: Disable disk checks on all ext4 disk devices.
+- name: "Disable disk checks on all ext4 disk devices."
   shell: "tune2fs -c 0 -i 0 {{ item }}"
+  args:
+    warn: 'no'
   with_items: "{{ common_disks_list.stdout_lines }}"
