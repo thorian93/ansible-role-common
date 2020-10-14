@@ -16,7 +16,6 @@
     line: "127.0.0.1 {{ inventory_hostname }} localhost"
     regexp: "^127.0.0.1"
     state: present
-  notify: restart postfix
 
 - name: "Include Derivate specific Variables."
   include_vars: "{{ ansible_os_family }}.yml"

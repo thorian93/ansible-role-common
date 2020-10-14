@@ -1,24 +1,24 @@
 ---
 - name: "Configure shopt Preferences."
   lineinfile:
-   dest: /etc/bash.bashrc
-   line: "{{ item }}"
-   create: 'true'
+    dest: /etc/bash.bashrc
+    line: "{{ item }}"
+    create: 'true'
   with_items: "{{ shopt_options }}"
 
 - name: "Configure Bash Completion."
   blockinfile:
-   dest: /etc/bash.bashrc
-   create: 'true'
-   marker: "# {mark} ANSIBLE MANAGED BLOCK"
-   content: |
-    if ! shopt -oq posix; then
-       if [ -f /usr/share/bash-completion/bash_completion ]; then
-          . /usr/share/bash-completion/bash_completion
-       elif [ -f /etc/bash_completion ]; then
-          . /etc/bash_completion
-       fi
-    fi
+    dest: /etc/bash.bashrc
+    create: 'true'
+    marker: "# {mark} ANSIBLE MANAGED BLOCK"
+    content: |
+     if ! shopt -oq posix; then
+        if [ -f /usr/share/bash-completion/bash_completion ]; then
+           . /usr/share/bash-completion/bash_completion
+        elif [ -f /etc/bash_completion ]; then
+           . /etc/bash_completion
+        fi
+     fi
 
 - name: "Workaround - Install python-xml."
   shell: zypper in -y python-xml
