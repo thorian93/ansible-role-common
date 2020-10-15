@@ -2,6 +2,10 @@
 
 This role manages several parts of a Linux system which are not worth their own role.
 
+[![Ansible Role: Common](https://img.shields.io/ansible/role/51293?style=flat-square)](https://galaxy.ansible.com/thorian93/ansible_role_common)
+[![Ansible Role: Common](https://img.shields.io/ansible/quality/51293?style=flat-square)](https://galaxy.ansible.com/thorian93/ansible_role_common)
+[![Ansible Role: Common](https://img.shields.io/ansible/role/d/51293?style=flat-square)](https://galaxy.ansible.com/thorian93/ansible_role_common)
+
 ## Here be Dragons!
 
 When managing DNS resolution with this role be aware of the following: On Ubuntu this role will remove the symlink on /etc/resolv.conf if it exists and replace it with a static file. The symlink originates in the `systemd-resolved` daemon. Managing that daemon is at least currently out of scope for this role. I know this not a beautiful solution but it works for me. If you know how to handle this better feel free to contact me or create a PR.
