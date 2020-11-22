@@ -14,23 +14,23 @@ galaxy_info:
   platforms:
     - name: EL
       versions:
-      - 7
-      - 8
+        - 7
+        - 8
     - name: Debian
       versions:
-      - Stretch
-      - Buster
+        - Stretch
+        - Buster
     - name: Fedora
       versions:
-      - 30
-      - 31
-      - 32
+        - 30
+        - 31
+        - 32
     - name: SLES
       versions:
-      - 11
-      - 12
+        - 11
+        - 12
     - name: Ubuntu
       versions:
-      - Xenial
-      - Bionic
-      - Focal
+        - Xenial
+        - Bionic
+        - Focal

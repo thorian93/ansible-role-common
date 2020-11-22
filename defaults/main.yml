@@ -30,17 +30,17 @@ common_vim_configure: false
 # Users
 ## Users can be defined on several levels and will be concatenated
 common_global_users_present: []
-  # - name: johndoe
-  #   password: []
-  #   update_password: always
-  #   keys: []
-  #     - foobar
-  #   shell: /bin/bash
-  #   user_groups: []
-  #   append: yes
-  #   system: no
-  #   state: present
-  #   remove: no
+# - name: johndoe
+#   password: []
+#   update_password: always
+#   keys: []
+#     - foobar
+#   shell: /bin/bash
+#   user_groups: []
+#   append: yes
+#   system: no
+#   state: present
+#   remove: no
 common_os_users_present: []
 common_system_users_present: []
 common_stage_users_present: []
@@ -58,9 +58,9 @@ common_dns_servers:
   - 1.1.1.1
   - 1.0.0.1
 common_dns_options: []
-  # - "timeout:3"
-  # - "attempts:2"
-  # - "rotate"
+# - "timeout:3"
+# - "attempts:2"
+# - "rotate"
 
 # Timezone
 common_timezone: "Europe/Berlin"
@@ -69,12 +69,12 @@ common_timezone: "Europe/Berlin"
 common_scripting_path: /opt/control/scripts
 common_config_path: /opt/control/config
 common_scripting_scripts_global: []
-  # - src:
-  #   dest:
-  #   owner:
-  #   group:
-  #   mode:
-  #   state: 
+# - src:
+#   dest:
+#   owner:
+#   group:
+#   mode:
+#   state:
 common_scripting_scripts_os: []
 common_scripting_scripts_system: []
 common_scripting_scripts_stage: []
