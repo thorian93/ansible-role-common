@@ -23,5 +23,5 @@
 - name: "Workaround - Install python-xml."
   shell: zypper in -y python-xml
   args:
-    warn: false
+    warn: 'false'
   when: ansible_distribution == "opensuse Leap" and ansible_distribution_major_version == "15"

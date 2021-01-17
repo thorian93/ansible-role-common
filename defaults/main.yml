@@ -16,16 +16,16 @@ common_stable_os:
   - Ubuntu 20
 
 # Common Management Selections
-common_crontabs_configure: false
-common_disks_configure: false
-common_dns_configure: false
-common_groups_configure: false
-common_zsh_configure: false
-common_scripting_configure: false
-common_software_configure: false
-common_users_configure: false
-common_timezone_configure: false
-common_vim_configure: false
+common_crontabs_configure: 'false'
+common_disks_configure: 'false'
+common_dns_configure: 'false'
+common_groups_configure: 'false'
+common_zsh_configure: 'false'
+common_scripting_configure: 'false'
+common_software_configure: 'false'
+common_users_configure: 'false'
+common_timezone_configure: 'false'
+common_vim_configure: 'false'
 
 # Users
 ## Users can be defined on several levels and will be concatenated
@@ -47,10 +47,10 @@ common_stage_users_present: []
 common_role_users_present: []
 
 # Optional Apps
-common_optional_apps_install: false
+common_optional_apps_install: 'false'
 
 # EPEL for RedHat
-common_epel_enabled: false
+common_epel_enabled: 'false'
 
 # DNS
 common_dns_search: []
