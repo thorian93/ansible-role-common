@@ -1,6 +1,8 @@
 ---
 variables:
-  GITHUB_REPO: "git@github.com:thorian93/ansible-role-common.git"
+  REPO_NAME: "ansible-role-common"
+  GITHUB_REPO: "git@github.com:thorian93/${REPO_NAME}.git"
+  GITLAB_REPO: "git@gitlab.com:thorian93_ansible/${REPO_NAME}.git"
 
 stages:
   - cleanup
@@ -63,6 +65,28 @@ github-deploy-tags:
   script:
     - git remote set-url --push origin ${GITHUB_REPO}
     - git push origin ${CI_COMMIT_TAG}
+  only:
+    - tags
+  except:
+    - branches
+
+gitlab-deploy-master:
+  stage: deploy
+  tags:
+    - shell
+  script:
+    - git remote add gitlab ${GITLAB_REPO}
+    - git push gitlab HEAD:${CI_COMMIT_REF_NAME}
+  only:
+    - master
+
+gitlab-deploy-tags:
+  stage: deploy
+  tags:
+    - shell
+  script:
+    - git remote add gitlab ${GITLAB_REPO}
+    - git push gitlab ${CI_COMMIT_TAG}
   only:
     - tags
   except:
