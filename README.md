@@ -28,16 +28,16 @@ No special requirements; note that this role requires root access, so either run
 
 Available variables are listed below, along with default values (see `defaults/main.yml`):
 
-    common_crontabs_configure: false
-    common_disks_configure: false
-    common_dns_configure: false
-    common_groups_configure: false
-    common_zsh_configure: false
-    common_scripting_configure: false
-    common_software_configure: false
-    common_users_configure: false
-    common_timezone_configure: false
-    common_vim_configure: false
+    common_configure_crontabs: 'false'
+    common_configure_disks: 'false'
+    common_configure_dns: 'false'
+    common_configure_groups: 'false'
+    common_configure_zsh: 'false'
+    common_configure_scripting: 'false'
+    common_configure_software: 'false'
+    common_configure_users: 'false'
+    common_configure_timezone: 'false'
+    common_configure_vim: 'false'
 
 Enable and disable managed sections of this role.
 
@@ -60,11 +60,11 @@ Enable and disable managed sections of this role.
 
 Users can be defined on several levels. This role defines five levels based on my personal experience. All above variables will be concatenated so every system gets the exact users intended for it. The variables are intended to be used in the above shown order. So for global users that should be present on any machine in your inventory you want to use `common_global_users_present` while the other stages can be used as seen fit. The commented block shows the currently available values to be configured for a user.
 
-    common_optional_apps_install: false
+    common_optional_apps_install: 'false'
 
 Enable installation of optional apps.
 
-    common_epel_enabled: false
+    common_epel_enabled: 'false'
 
 Enable EPEL repository on RedHat derivates.
 

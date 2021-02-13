@@ -16,16 +16,17 @@ common_stable_os:
   - Ubuntu 20
 
 # Common Management Selections
-common_crontabs_configure: 'false'
-common_disks_configure: 'false'
-common_dns_configure: 'false'
-common_groups_configure: 'false'
-common_zsh_configure: 'false'
-common_scripting_configure: 'false'
-common_software_configure: 'false'
-common_users_configure: 'false'
-common_timezone_configure: 'false'
-common_vim_configure: 'false'
+# Cleanup Variable Names. These backwards compatibility will be removed in a future version of this role!
+common_configure_crontabs: "{{ common_crontabs_configure | default('false') }}"
+common_configure_disks: "{{ common_disks_configure | default('false') }}"
+common_configure_dns: "{{ common_dns_configure | default('false') }}"
+common_configure_groups: "{{ common_groups_configure | default('false') }}"
+common_configure_zsh: "{{ common_zsh_configure | default('false') }}"
+common_configure_scripting: "{{ common_scripting_configure | default('false') }}"
+common_configure_software: "{{ common_software_configure | default('false') }}"
+common_configure_users: "{{ common_users_configure | default('false') }}"
+common_configure_timezone: "{{ common_timezone_configure | default('false') }}"
+common_configure_vim: "{{ common_vim_configure | default('false') }}"
 
 # Users
 ## Users can be defined on several levels and will be concatenated

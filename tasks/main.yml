@@ -37,40 +37,40 @@
 
 - name: "Include Software Management Playbook."
   include_tasks: software.yml
-  when: common_software_configure | bool
+  when: common_configure_software | bool
 
 - name: "Include DNS Nameservers Management Playbook."
   include_tasks: dns.yml
-  when: common_dns_configure | bool
+  when: common_configure_dns | bool
 
 - name: "Include Timezone Management Playbook."
   include_tasks: timezone.yml
-  when: common_timezone_configure | bool
+  when: common_configure_timezone | bool
 
 - name: "Include Disks Management Playbook."
   include_tasks: disks.yml
-  when: common_disks_configure | bool
+  when: common_configure_disks | bool
 
 - name: "Include Groups Management Playbook."
   include_tasks: groups.yml
-  when: common_groups_configure | bool
+  when: common_configure_groups | bool
 
 - name: "Include Users Management Playbook."
   include_tasks: users.yml
-  when: common_users_configure | bool
+  when: common_configure_users | bool
 
 - name: "Include Crontabs Management Playbook."
   include_tasks: crontabs.yml
-  when: common_crontabs_configure | bool
+  when: common_configure_crontabs | bool
 
 - name: "Include Scripting Management Playbook."
   include_tasks: scripting.yml
-  when: common_scripting_configure | bool
+  when: common_configure_scripting | bool
 
 - name: "Include VIM Playbook."
   include_tasks: vim.yml
-  when: common_vim_configure | bool
+  when: common_configure_vim | bool
 
 - name: "Include oh-my-zsh Playbook."
   include_tasks: oh-my-zsh.yml
-  when: common_zsh_configure | bool
+  when: common_configure_zsh | bool
