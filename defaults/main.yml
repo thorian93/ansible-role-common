@@ -7,6 +7,7 @@ common_stable_os:
   - Fedora 30
   - Fedora 31
   - Fedora 32
+  - Fedora 33
   - SLES 11
   - SLES 12
   # - openSUSE Leap 15
