@@ -85,7 +85,7 @@ source $ZSH/oh-my-zsh.sh
 # ssh
 # export SSH_KEY_PATH="~/.ssh/rsa_id"
 
-{% if common_proxy_profile_configure | bool %}
+{% if common_proxy_profile_configure is defined and common_proxy_profile_configure | bool %}
 # source proxy variables if they exist:
 source /etc/profile.d/99proxy.sh
 {% endif %}
