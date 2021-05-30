@@ -1,7 +1,8 @@
 ---
 galaxy_info:
-  author: Thorian93
-  description: Ansible Role Common
+  role_name: common
+  author: thorian93
+  description: Common System Management
   license: "license (MIT)"
 
   min_ansible_version: 2.9
