@@ -2,9 +2,9 @@
 
 This role manages several parts of a Linux system which are not worth their own role.
 
-[![Ansible Role: Common](https://img.shields.io/ansible/role/51293?style=flat-square)](https://galaxy.ansible.com/thorian93/ansible_role_common)
-[![Ansible Role: Common](https://img.shields.io/ansible/quality/51293?style=flat-square)](https://galaxy.ansible.com/thorian93/ansible_role_common)
-[![Ansible Role: Common](https://img.shields.io/ansible/role/d/51293?style=flat-square)](https://galaxy.ansible.com/thorian93/ansible_role_common)
+[![Ansible Role: Common](https://img.shields.io/ansible/role/55131?style=flat-square)](https://galaxy.ansible.com/thorian93/common)
+[![Ansible Role: Common](https://img.shields.io/ansible/quality/55131?style=flat-square)](https://galaxy.ansible.com/thorian93/common)
+[![Ansible Role: Common](https://img.shields.io/ansible/role/d/55131?style=flat-square)](https://galaxy.ansible.com/thorian93/common)
 
 ## Here be Dragons!
 
