@@ -8,12 +8,12 @@
 
 - name: "Set hostname."
   hostname:
-    name: "{{ inventory_hostname }}"
+    name: "{{ common_host_name | default('{{ inventory_hostname }}') }}"
 
 - name: "Configure /etc/hosts."
   lineinfile:
     path: /etc/hosts
-    line: "127.0.0.1 {{ inventory_hostname }} localhost"
+    line: "127.0.0.1 {{ common_host_name | default('{{ inventory_hostname }}') }} localhost"
     regexp: "^127.0.0.1"
     state: present
 

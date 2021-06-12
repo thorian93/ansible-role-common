@@ -10,7 +10,7 @@ common_stable_os:
   - Fedora 33
   - SLES 11
   - SLES 12
-  # - openSUSE Leap 15
+  - openSUSE Leap 15
   # - openSUSE Leap 42
   - Ubuntu 16
   - Ubuntu 18
@@ -28,6 +28,9 @@ common_configure_software: "{{ common_software_configure | default('false') }}"
 common_configure_users: "{{ common_users_configure | default('false') }}"
 common_configure_timezone: "{{ common_timezone_configure | default('false') }}"
 common_configure_vim: "{{ common_vim_configure | default('false') }}"
+
+# Host
+common_host_name: "{{ inventory_hostname }}"
 
 # Users
 ## Users can be defined on several levels and will be concatenated
