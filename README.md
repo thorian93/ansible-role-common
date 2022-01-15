@@ -21,7 +21,7 @@ No special requirements; note that this role requires root access, so either run
 
     - hosts: foobar
       roles:
-        - role: ansible-role-common
+        - role: thorian93.common
           become: yes
 
 ## Role Variables
@@ -40,6 +40,10 @@ Available variables are listed below, along with default values (see `defaults/m
     common_configure_vim: 'false'
 
 Enable and disable managed sections of this role.
+
+    common_host_name: "{{ inventory_hostname }}"
+
+Configure the managed systems hostname. This defaults to the `inventory_hostname`.
 
     common_global_users_present: []
       # - name: johndoe
