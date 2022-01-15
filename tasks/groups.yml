@@ -17,6 +17,11 @@
       common_stage_groups_absent | default('') | list  +
       common_role_groups_absent | default('') | list }}
 
+- name: "Ensure Admin Group exists."
+  group:
+    name: "{{ common_admin_group }}"
+    state: "present"
+
 - name: "Create groups."
   group:
     name: "{{ item.name }}"
