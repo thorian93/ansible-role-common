@@ -8,7 +8,7 @@
   file:
     path: /etc/resolv.conf
     state: absent
-  when: common_resolv_symlink_status.stat.islnk is defined and common_resolv_symlink_status.stat.islnk and ansible_distribution == "Ubuntu"
+  when: common_resolv_symlink_status.stat.islnk is defined and common_resolv_symlink_status.stat.islnk
 
 - name: "Make sure /etc/resolv.conf is modifiable for this play."
   command: chattr -i /etc/resolv.conf
