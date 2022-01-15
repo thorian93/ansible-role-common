@@ -11,6 +11,7 @@ common_apps_derivate:
   - iptstate
   - lsb-release
   - mailutils
+  - net-tools
   - nmon
   - p7zip
   - python-apt
