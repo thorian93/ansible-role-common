@@ -5,12 +5,10 @@ common_stable_os:
   - Debian 9
   - Debian 10
   - Debian 11
-  - Fedora 30
-  - Fedora 31
-  - Fedora 32
   - Fedora 33
   - Fedora 34
   - Fedora 35
+  - Fedora 36
   - SLES 11
   - SLES 12
   - openSUSE Leap 15
@@ -18,6 +16,7 @@ common_stable_os:
   - Ubuntu 16
   - Ubuntu 18
   - Ubuntu 20
+  - Ubuntu 22
 
 # Common Management Selections
 # Cleanup Variable Names. These backwards compatibility will be removed in a future version of this role!
