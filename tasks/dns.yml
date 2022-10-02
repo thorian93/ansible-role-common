@@ -12,7 +12,9 @@
 
 - name: "Make sure /etc/resolv.conf is modifiable for this play."
   command: chattr -i /etc/resolv.conf
-  when: common_resolv_symlink_status.stat.islnk is defined and not common_resolv_symlink_status.stat.islnk
+  when: |
+    (common_resolv_symlink_status.stat.islnk is defined and not common_resolv_symlink_status.stat.islnk)
+    and 'container' not in ansible_facts.virtualization_tech_guest
 
 - name: "Configure DNS Servers for Host."
   template:
@@ -26,3 +28,4 @@
 
 - name: "Make sure /etc/resolv.conf is not modifiable by anyone."
   command: chattr +i /etc/resolv.conf
+  when: ('container' not in ansible_facts.virtualization_tech_guest)
