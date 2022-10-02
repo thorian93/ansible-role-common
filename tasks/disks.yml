@@ -6,9 +6,11 @@
   register: common_disks_list
   changed_when: common_disks_list.rc == 0
   failed_when: common_disks_list.rc > 1
+  when: ('container' not in ansible_facts.virtualization_tech_guest)
 
 - name: "Disable disk checks on all ext4 disk devices."
   shell: "tune2fs -c 0 -i 0 {{ item }}"
   args:
     warn: 'false'
   with_items: "{{ common_disks_list.stdout_lines }}"
+  when: ('container' not in ansible_facts.virtualization_tech_guest)
