@@ -15,6 +15,7 @@ common_minimal_apps:
   - parted
   - rsync
   - screen
+  - time
   - tree
   - unzip
   - vim
@@ -22,6 +23,5 @@ common_minimal_apps:
   - zsh
 
 common_optional_apps:
-  - glances
   - mc
   - powertop
