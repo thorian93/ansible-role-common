@@ -1,6 +1,6 @@
 ---
 - name: "Configure VIM."
-  lineinfile:
+  ansible.builtin.lineinfile:
     dest: "{{ common_vimrc_path }}"
     line: "let g:skip_defaults_vim = 1"
     regexp: "(# |^)let g:skip_defaults_vim.*"

@@ -1,6 +1,6 @@
 ---
 - name: "Concatenate Users Presence Variables."
-  set_fact:
+  ansible.builtin.set_fact:
     common_users_present: >-
       {{ common_global_users_present | default('') | list  +
       common_os_users_present | default('') | list  +
@@ -9,7 +9,7 @@
       common_role_users_present | default('') | list }}
 
 - name: "Concatenate Users Absence Variables."
-  set_fact:
+  ansible.builtin.set_fact:
     common_users_absent: >-
       {{ common_global_users_absent | default('') | list  +
       common_os_users_absent | default('') | list  +
@@ -18,7 +18,7 @@
       common_role_users_absent | default('') | list }}
 
 - name: "Create Users."
-  user:
+  ansible.builtin.user:
     name: "{{ item.name }}"
     password: "{{ item.password }}"
     update_password: "{{ item.update_password }}"
@@ -31,7 +31,7 @@
   no_log: 'true'
 
 - name: "Add Public Keys for Users."
-  authorized_key:
+  ansible.builtin.authorized_key:
     user: "{{ item.0.name }}"
     state: "{{ item.0.state }}"
     key: "{{ item.1 | default() }}"
@@ -42,7 +42,7 @@
   no_log: 'true'
 
 - name: "Remove Users."
-  user:
+  ansible.builtin.user:
     name: "{{ item.name }}"
     state: "{{ item.state }}"
     remove: "{{ item.remove }}"

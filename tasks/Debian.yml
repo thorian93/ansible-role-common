@@ -1,13 +1,13 @@
 ---
 - name: "Configure shopt Preferences."
-  lineinfile:
+  ansible.builtin.lineinfile:
    dest: /etc/bash.bashrc
    line: "{{ item }}"
    create: 'true'
   with_items: "{{ shopt_options }}"
 
 - name: "Configure Bash Completion."
-  blockinfile:
+  ansible.builtin.blockinfile:
    dest: /etc/bash.bashrc
    create: 'true'
    marker: "# {mark} ANSIBLE MANAGED BLOCK"

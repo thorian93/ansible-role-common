@@ -1,6 +1,6 @@
 ---
 - name: "Concatenate Scripting Variables."
-  set_fact:
+  ansible.builtin.set_fact:
     common_scripting_scripts: >-
       {{ common_scripting_scripts_global | default('') | list  +
       common_scripting_scripts_os | default('') | list  +
@@ -9,7 +9,7 @@
       common_scripting_scripts_role | default('') | list }}
 
 - name: "Create Scripts Path."
-  file:
+  ansible.builtin.file:
     path: "{{ common_scripting_path }}"
     state: directory
     owner: root
@@ -17,7 +17,7 @@
     mode: 0740
 
 - name: "Upload Scripts."
-  template:
+  ansible.builtin.template:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
     owner: "{{ item.owner }}"
@@ -27,14 +27,14 @@
   when: common_scripting_scripts is defined
 
 - name: "Remove Scripts."
-  file:
+  ansible.builtin.file:
     path: "{{ item.dest }}"
     state: "{{ item.state }}"
   with_items: "{{ common_scripting_scripts }}"
   when: common_scripting_scripts is defined and item.state == "absent"
 
 - name: "Create Config Path."
-  file:
+  ansible.builtin.file:
     path: "{{ common_config_path }}"
     state: directory
     owner: root

@@ -1,6 +1,6 @@
 ---
 - name: "Configure crontabs."
-  cron:
+  ansible.builtin.cron:
     name: "{{ item.name }}"
     job: "{{ item.job }}"
     state: "{{ item.state }}"

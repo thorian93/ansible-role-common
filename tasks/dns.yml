@@ -1,23 +1,23 @@
 ---
 - name: "Determine if /etc/resolv.conf is a Symlink."
-  stat:
+  ansible.builtin.stat:
     path: /etc/resolv.conf
   register: common_resolv_symlink_status
 
 - name: "Remove Symlink on /etc/resolv.conf for Ubuntu."
-  file:
+  ansible.builtin.file:
     path: /etc/resolv.conf
     state: absent
   when: common_resolv_symlink_status.stat.islnk is defined and common_resolv_symlink_status.stat.islnk
 
 - name: "Make sure /etc/resolv.conf is modifiable for this play."
-  command: chattr -i /etc/resolv.conf
+  ansible.builtin.command: chattr -i /etc/resolv.conf
   when: |
     (common_resolv_symlink_status.stat.islnk is defined and not common_resolv_symlink_status.stat.islnk)
     and 'container' not in ansible_facts.virtualization_tech_guest
 
 - name: "Configure DNS Servers for Host."
-  template:
+  ansible.builtin.template:
     src: resolv.conf.j2
     dest: /etc/resolv.conf
     backup: 'true'
@@ -27,5 +27,5 @@
     setype: net_conf_t
 
 - name: "Make sure /etc/resolv.conf is not modifiable by anyone."
-  command: chattr +i /etc/resolv.conf
+  ansible.builtin.command: chattr +i /etc/resolv.conf
   when: ('container' not in ansible_facts.virtualization_tech_guest)

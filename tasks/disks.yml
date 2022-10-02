@@ -1,6 +1,6 @@
 ---
 - name: "Get all ext4 disk devices."
-  shell: "set -o pipefail && df -Pt ext4 | cut -d ' ' -f 1 | tail -n +2"
+  ansible.builtin.shell: "set -o pipefail && df -Pt ext4 | cut -d ' ' -f 1 | tail -n +2"
   args:
     executable: /bin/bash
   register: common_disks_list
@@ -9,7 +9,7 @@
   when: ('container' not in ansible_facts.virtualization_tech_guest)
 
 - name: "Disable disk checks on all ext4 disk devices."
-  shell: "tune2fs -c 0 -i 0 {{ item }}"
+  ansible.builtin.shell: "tune2fs -c 0 -i 0 {{ item }}"
   args:
     warn: 'false'
   with_items: "{{ common_disks_list.stdout_lines }}"
