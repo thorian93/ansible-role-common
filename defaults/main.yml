@@ -20,16 +20,16 @@ common_stable_os:
 
 # Common Management Selections
 # Cleanup Variable Names. These backwards compatibility will be removed in a future version of this role!
-common_configure_crontabs: "{{ common_crontabs_configure | default('false') }}"
-common_configure_disks: "{{ common_disks_configure | default('false') }}"
-common_configure_dns: "{{ common_dns_configure | default('false') }}"
-common_configure_groups: "{{ common_groups_configure | default('false') }}"
-common_configure_zsh: "{{ common_zsh_configure | default('false') }}"
-common_configure_scripting: "{{ common_scripting_configure | default('false') }}"
-common_configure_software: "{{ common_software_configure | default('false') }}"
-common_configure_users: "{{ common_users_configure | default('false') }}"
-common_configure_timezone: "{{ common_timezone_configure | default('false') }}"
-common_configure_vim: "{{ common_vim_configure | default('false') }}"
+common_configure_crontabs: "{{ common_crontabs_configure | default(false) }}"
+common_configure_disks: "{{ common_disks_configure | default(false) }}"
+common_configure_dns: "{{ common_dns_configure | default(false) }}"
+common_configure_groups: "{{ common_groups_configure | default(false) }}"
+common_configure_zsh: "{{ common_zsh_configure | default(false) }}"
+common_configure_scripting: "{{ common_scripting_configure | default(false) }}"
+common_configure_software: "{{ common_software_configure | default(false) }}"
+common_configure_users: "{{ common_users_configure | default(false) }}"
+common_configure_timezone: "{{ common_timezone_configure | default(false) }}"
+common_configure_vim: "{{ common_vim_configure | default(false) }}"
 
 # Host
 common_host_name: "{{ inventory_hostname }}"
@@ -54,10 +54,10 @@ common_stage_users_present: []
 common_role_users_present: []
 
 # Optional Apps
-common_optional_apps_install: 'false'
+common_optional_apps_install: false
 
 # EPEL for RedHat
-common_epel_enabled: 'false'
+common_epel_enabled: false
 
 # DNS
 common_dns_search: []

@@ -17,7 +17,7 @@
   ansible.builtin.file:
     src: /usr/share/zoneinfo/{{ common_timezone }}
     dest: /etc/localtime
-    force: 'true'
+    force: true
     state: link
     owner: root
     group: root

@@ -3,13 +3,13 @@
   ansible.builtin.lineinfile:
     dest: /etc/bashrc
     line: "{{ item }}"
-    create: 'true'
+    create: true
   with_items: "{{ shopt_options }}"
 
 - name: "Configure Bash Completion."
   ansible.builtin.blockinfile:
     dest: /etc/bashrc
-    create: 'true'
+    create: true
     marker: "# {mark} ANSIBLE MANAGED BLOCK"
     content: |
      if ! shopt -oq posix; then

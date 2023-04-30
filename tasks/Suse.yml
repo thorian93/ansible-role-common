@@ -3,13 +3,13 @@
   ansible.builtin.lineinfile:
     dest: /etc/bash.bashrc
     line: "{{ item }}"
-    create: 'true'
+    create: true
   with_items: "{{ shopt_options }}"
 
 - name: "Configure Bash Completion."
   ansible.builtin.blockinfile:
     dest: /etc/bash.bashrc
-    create: 'true'
+    create: true
     marker: "# {mark} ANSIBLE MANAGED BLOCK"
     content: |
      if ! shopt -oq posix; then
@@ -23,5 +23,4 @@
 - name: "Workaround - Install python-xml."
   ansible.builtin.shell: zypper in -y python-xml
   args:
-    warn: 'false'
   when: ansible_distribution == "opensuse Leap" and ansible_distribution_major_version == "15"
